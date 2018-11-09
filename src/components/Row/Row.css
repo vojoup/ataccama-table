@@ -1,0 +1,14 @@
+.row {
+  background-color: gray;
+}
+
+.row:hover {
+  background-color: rgba(128, 128, 128, 0.486);
+}
+
+.data-cell {
+  color: #ffffff;
+}
+
+.kids {
+}

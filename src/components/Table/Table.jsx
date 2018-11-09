@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
-import Column from '../Column/Column';
+import Row from '../Row/Row';
 import './Table.css';
 
 export default class Table extends Component {
-  renderColumns() {
+  renderRows() {
     const { data } = this.props;
-    return data.map(({ data, i }) => <Column data={data} key={i} />);
+    return data.map(({ data, kids }, i) => (
+      <Row data={data} kids={kids} key={i} />
+    ));
   }
 
-  renderTableLable() {
+  renderTableHeading() {
     const { data } = this.props;
-    return Object.keys(data[0].data).map((key, i) => (
-      <span className="lable" key={key + i}>
+    const headingHtml = Object.keys(data[0].data).map((key, i) => (
+      <th className="lable" key={key + i}>
         {key}
-      </span>
+      </th>
     ));
+    const blank = <th key="blank" className="label" />;
+    headingHtml.unshift(blank);
+    return headingHtml;
   }
 
   render() {
     return (
-      <>
-        <div className="table-heading">{this.renderTableLable()}</div>
-        <div>{this.renderColumns()}</div>
-      </>
+      <table>
+        <thead>
+          <tr className="table-heading">{this.renderTableHeading()}</tr>
+        </thead>
+        <tbody>{this.renderRows()}</tbody>
+      </table>
     );
   }
 }
