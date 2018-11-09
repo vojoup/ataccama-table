@@ -5,12 +5,9 @@
   justify-content: space-between;
 }
 
-.column-heading {
-  background-color: #f1f1f1;
-  color: black;
-  text-align: center;
-}
-
-.column-heading {
-  margin: 0;
+.data-cell {
+  margin: 0.6rem;
+  color: #ffffff;
+  justify-self: center;
+  align-self: center;
 }

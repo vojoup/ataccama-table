@@ -5,7 +5,9 @@ import './Table.css';
 export default class Table extends Component {
   renderColumns() {
     const { data } = this.props;
-    return data.map(({ data, i }) => <Column data={data} key={i} />);
+    return data.map(({ data, kids }, i) => (
+      <Column data={data} kids={kids} key={i} />
+    ));
   }
 
   renderTableLable() {
@@ -19,10 +21,10 @@ export default class Table extends Component {
 
   render() {
     return (
-      <>
+      <div className="grid">
         <div className="table-heading">{this.renderTableLable()}</div>
         <div>{this.renderColumns()}</div>
-      </>
+      </div>
     );
   }
 }
