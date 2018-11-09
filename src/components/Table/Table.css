@@ -1,0 +1,13 @@
+.lable {
+  margin: 0.6rem;
+  color: #111;
+}
+
+.table-heading {
+  background-color: rgb(168, 156, 156);
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-bottom: 0;
+  border-bottom: #111 1px solid;
+}
