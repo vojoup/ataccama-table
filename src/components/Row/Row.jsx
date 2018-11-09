@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Row.css';
+import Kids from '../Kids/Kids';
 
 export default class Row extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class Row extends Component {
     this.state = {
       displayingKids: false,
     };
-    this.showKids = this.showKids.bind(this);
+    this.toggleShowKids = this.toggleShowKids.bind(this);
     this.renderData = this.renderData.bind(this);
   }
 
@@ -15,7 +16,7 @@ export default class Row extends Component {
     return Object.keys(obj).length === 0;
   }
 
-  showKids() {
+  toggleShowKids() {
     const { displayingKids } = this.state;
     this.setState({ displayingKids: !displayingKids });
   }
@@ -26,26 +27,30 @@ export default class Row extends Component {
     const html = [];
     if (!this.isEmpty(kids)) {
       html.push(
-        <span key="<" className="data-cell">
-          {displayingKids ? '˅' : '>'}
-        </span>,
+        <th key="<" className="data-cell">
+          {displayingKids ? ' ˅ ' : ' > '}
+        </th>,
       );
+    } else {
+      html.push(<th key="<" className="data-cell" />);
     }
     Object.keys(data).map((item, i) =>
       html.push(
-        <span className="data-cell" key={i}>
+        <th className="data-cell" key={i}>
           {data[item]}
-        </span>,
+        </th>,
       ),
     );
     return html;
   }
 
   render() {
+    const { displayingKids, kids } = this.state;
     return (
-      <div className="row" onClick={this.showKids}>
+      <tr className="row" onClick={this.toggleShowKids}>
         {this.renderData()}
-      </div>
+        {displayingKids && kids}
+      </tr>
     );
   }
 }

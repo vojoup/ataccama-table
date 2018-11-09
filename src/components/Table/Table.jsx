@@ -10,21 +10,26 @@ export default class Table extends Component {
     ));
   }
 
-  renderTableLable() {
+  renderTableHeading() {
     const { data } = this.props;
-    return Object.keys(data[0].data).map((key, i) => (
-      <span className="lable" key={key + i}>
+    const headingHtml = Object.keys(data[0].data).map((key, i) => (
+      <th className="lable" key={key + i}>
         {key}
-      </span>
+      </th>
     ));
+    const blank = <th key="blank" className="label" />;
+    headingHtml.unshift(blank);
+    return headingHtml;
   }
 
   render() {
     return (
-      <div>
-        <div className="table-heading">{this.renderTableLable()}</div>
-        <div>{this.renderRows()}</div>
-      </div>
+      <table>
+        <thead>
+          <tr className="table-heading">{this.renderTableHeading()}</tr>
+        </thead>
+        <tbody>{this.renderRows()}</tbody>
+      </table>
     );
   }
 }

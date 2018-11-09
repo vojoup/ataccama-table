@@ -1,14 +1,20 @@
 .lable {
-  margin: 0.6rem;
   color: #111;
   font-weight: 600;
 }
 
 .table-heading {
-  background-color: rgb(168, 156, 156);
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  margin-bottom: 0;
-  border-bottom: #111 1px solid;
+  background-color: rgba(168, 156, 156, 0.301);
+}
+
+table,
+th,
+td {
+  border: #111 1px solid;
+  border-collapse: collapse;
+  padding: 0 0.6rem;
+}
+
+thead > tr > th {
+  border: none;
 }

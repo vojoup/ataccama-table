@@ -1,20 +1,14 @@
 .row {
   background-color: gray;
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  border-bottom: #111 1px solid;
-  border-right: #111 1px solid;
-  border-left: #111 1px solid;
 }
 
 .row:hover {
-  background-color: rgba(128, 128, 128, 0.863);
+  background-color: rgba(128, 128, 128, 0.486);
 }
 
 .data-cell {
-  margin: 0.6rem;
   color: #ffffff;
-  justify-self: center;
-  align-self: center;
+}
+
+.kids {
 }
