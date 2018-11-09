@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Column.css';
+import './Row.css';
 
-export default class Column extends Component {
+export default class Row extends Component {
   constructor(props) {
     super(props);
     this.state = {

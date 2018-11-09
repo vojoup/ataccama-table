@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Column from '../Column/Column';
+import Row from '../Row/Row';
 import './Table.css';
 
 export default class Table extends Component {
-  renderColumns() {
+  renderRows() {
     const { data } = this.props;
     return data.map(({ data, kids }, i) => (
-      <Column data={data} kids={kids} key={i} />
+      <Row data={data} kids={kids} key={i} />
     ));
   }
 
@@ -21,9 +21,9 @@ export default class Table extends Component {
 
   render() {
     return (
-      <div className="grid">
+      <div>
         <div className="table-heading">{this.renderTableLable()}</div>
-        <div>{this.renderColumns()}</div>
+        <div>{this.renderRows()}</div>
       </div>
     );
   }
