@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Row.css';
+import Table from '../Table/Table';
 
 export default class Row extends Component {
   constructor(props) {
@@ -18,6 +19,10 @@ export default class Row extends Component {
   toggleShowKids() {
     const { displayingKids } = this.state;
     this.setState({ displayingKids: !displayingKids });
+  }
+
+  getTableLable(kids) {
+    return Object.keys(kids)[0];
   }
 
   renderData() {
@@ -45,12 +50,23 @@ export default class Row extends Component {
 
   render() {
     const { displayingKids } = this.state;
+    const { kids } = this.props;
     return (
       <>
         <tr className="row" onClick={this.toggleShowKids}>
           {this.renderData()}
         </tr>
-        <tr>{displayingKids && <div className="wrapper">KIDS</div>}</tr>
+        <tr>
+          {displayingKids && (
+            <div className="wrapper">
+              <Table
+                data={kids}
+                isKids={true}
+                tableLabel={this.getTableLable(kids)}
+              />
+            </div>
+          )}
+        </tr>
       </>
     );
   }

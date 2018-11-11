@@ -11,7 +11,7 @@ class App extends Component {
           <h1>Super dupper app</h1>
         </header>
         <main className="main-content">
-          <Table data={Data} />
+          <Table data={Data} isKids={false} />
         </main>
       </div>
     );
