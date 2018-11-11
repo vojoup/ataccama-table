@@ -53,19 +53,22 @@ export default class Row extends Component {
     const { kids } = this.props;
     return (
       <>
-        <tr className="row" onClick={this.toggleShowKids}>
+        <tr
+          className="row"
+          onClick={this.isEmpty(kids) ? null : this.toggleShowKids}
+        >
           {this.renderData()}
         </tr>
-        <tr>
-          {displayingKids && (
-            <div className="wrapper">
+        <tr colSpan="0">
+          <td colSpan="0">
+            {displayingKids && (
               <Table
                 data={kids}
                 isKids={true}
                 tableLabel={this.getTableLable(kids)}
               />
-            </div>
-          )}
+            )}
+          </td>
         </tr>
       </>
     );

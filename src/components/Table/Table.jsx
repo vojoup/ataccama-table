@@ -12,7 +12,6 @@ export default class Table extends Component {
       return data[Object.keys(data)[0]].records.map(({ data, kids }, i) => (
         <Row data={data} kids={kids} key={i} />
       ));
-      // console.log('DATA to render', data);
     }
   }
 
@@ -43,7 +42,7 @@ export default class Table extends Component {
     const headings = this.getHeadings(data, isKids);
     return (
       <table>
-        {tableLable && <caption>{tableLable}</caption>}
+        <caption>{tableLable}</caption>
         <thead>
           <tr className="table-heading">
             {this.renderTableHeading(headings, isKids)}
