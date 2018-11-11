@@ -33,8 +33,7 @@ export default class Table extends Component {
       </th>
     ));
     const blank = <th key="blank" className="label" />;
-    headingHtml.unshift(blank);
-    return headingHtml;
+    return [blank, ...headingHtml];
   }
 
   render() {

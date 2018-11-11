@@ -25,9 +25,8 @@ export default class Row extends Component {
     return Object.keys(kids)[0];
   }
 
-  renderData() {
-    const { data, kids } = this.props;
-    const { displayingKids } = this.state;
+  renderData(displayingKids, kids) {
+    const { data } = this.props;
     const html = [];
     if (!this.isEmpty(kids)) {
       html.push(
@@ -57,7 +56,7 @@ export default class Row extends Component {
           className="row"
           onClick={this.isEmpty(kids) ? null : this.toggleShowKids}
         >
-          {this.renderData()}
+          {this.renderData(displayingKids, kids)}
         </tr>
         <tr colSpan="0">
           <td colSpan="0">
