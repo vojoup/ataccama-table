@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Row.css';
-import Kids from '../Kids/Kids';
 
 export default class Row extends Component {
   constructor(props) {
@@ -45,12 +44,14 @@ export default class Row extends Component {
   }
 
   render() {
-    const { displayingKids, kids } = this.state;
+    const { displayingKids } = this.state;
     return (
-      <tr className="row" onClick={this.toggleShowKids}>
-        {this.renderData()}
-        {displayingKids && kids}
-      </tr>
+      <>
+        <tr className="row" onClick={this.toggleShowKids}>
+          {this.renderData()}
+        </tr>
+        <tr>{displayingKids && <div className="wrapper">KIDS</div>}</tr>
+      </>
     );
   }
 }
