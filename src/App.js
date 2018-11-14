@@ -9,6 +9,15 @@ class App extends Component {
     this.state = {
       data: Data,
     };
+    this.deleteRow = this.deleteRow.bind(this);
+  }
+
+  deleteRow(i) {
+    console.log(`DELETE ${i}`);
+    const { data } = this.state;
+    delete data[i];
+    const newData = data.filter(i => i);
+    this.setState({ data: newData });
   }
 
   render() {
@@ -19,7 +28,7 @@ class App extends Component {
           <h1>Super dupper app</h1>
         </header>
         <main className="main-content">
-          <Table data={data} isKids={false} />
+          <Table data={data} isKids={false} deleteRow={this.deleteRow} />
         </main>
       </div>
     );

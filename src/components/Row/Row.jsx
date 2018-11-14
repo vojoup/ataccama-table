@@ -10,6 +10,7 @@ export default class Row extends Component {
     };
     this.toggleShowKids = this.toggleShowKids.bind(this);
     this.renderData = this.renderData.bind(this);
+    this.deleteRow = this.deleteRow.bind(this);
   }
 
   isEmpty(obj) {
@@ -23,6 +24,12 @@ export default class Row extends Component {
 
   getTableLable(kids) {
     return Object.keys(kids)[0];
+  }
+
+  deleteRow(e) {
+    e.stopPropagation();
+    const { deleteRow, index } = this.props;
+    deleteRow(index);
   }
 
   renderData(displayingKids, kids) {
@@ -44,6 +51,11 @@ export default class Row extends Component {
         </th>,
       ),
     );
+    html.push(
+      <th key="X" className="data-cell delete" onClick={this.deleteRow}>
+        X
+      </th>,
+    );
     return html;
   }
 
@@ -58,8 +70,8 @@ export default class Row extends Component {
         >
           {this.renderData(displayingKids, kids)}
         </tr>
-        <tr colSpan="0">
-          <td colSpan="0">
+        <tr colSpan="12">
+          <td colSpan="12">
             {displayingKids && (
               <Table
                 data={kids}

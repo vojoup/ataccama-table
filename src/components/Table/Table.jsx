@@ -4,13 +4,14 @@ import './Table.css';
 
 export default class Table extends Component {
   renderRows(data, isKids) {
+    const { deleteRow } = this.props;
     if (!isKids) {
       return data.map(({ data, kids }, i) => (
-        <Row data={data} kids={kids} key={i} />
+        <Row data={data} kids={kids} index={i} key={i} deleteRow={deleteRow} />
       ));
     } else {
       return data[Object.keys(data)[0]].records.map(({ data, kids }, i) => (
-        <Row data={data} kids={kids} key={i} />
+        <Row data={data} kids={kids} key={i} deleteRow={deleteRow} />
       ));
     }
   }
@@ -33,7 +34,8 @@ export default class Table extends Component {
       </th>
     ));
     const blank = <th key="blank" className="label" />;
-    return [blank, ...headingHtml];
+    const remove = <th key="remove" className="label" />;
+    return [blank, ...headingHtml, remove];
   }
 
   render() {

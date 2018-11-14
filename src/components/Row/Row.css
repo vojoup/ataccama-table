@@ -13,3 +13,7 @@
 .wrapper {
   background-color: #5a6170;
 }
+
+.delete:hover {
+  cursor: pointer;
+}
