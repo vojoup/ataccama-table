@@ -37,11 +37,11 @@ export default class Table extends Component {
   }
 
   render() {
-    const { data, isKids, tableLable } = this.props;
+    const { data, isKids, tableLabel } = this.props;
     const headings = this.getHeadings(data, isKids);
     return (
       <table>
-        <caption>{tableLable}</caption>
+        <caption>{tableLabel}</caption>
         <thead>
           <tr className="table-heading">
             {this.renderTableHeading(headings, isKids)}
