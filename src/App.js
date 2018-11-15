@@ -12,12 +12,21 @@ class App extends Component {
     this.deleteRow = this.deleteRow.bind(this);
   }
 
-  deleteRow(i) {
-    console.log(`DELETE ${i}`);
+  deleteRow(index, path) {
     const { data } = this.state;
-    delete data[i];
-    const newData = data.filter(i => i);
-    this.setState({ data: newData });
+    if (index === path) {
+      data.splice(index, 1);
+    } else {
+      path = `kids.${path}`;
+      // console.log(`DELETE ${index}-${path}`);
+      for (const p of path.split('.')) {
+        // console.log(p);
+        delete data[index][p];
+      }
+    }
+    data.filter(d => d);
+    // console.log(`AFTER DELETE`, data);
+    this.setState({ data });
   }
 
   render() {

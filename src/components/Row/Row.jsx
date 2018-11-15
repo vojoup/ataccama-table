@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Row.css';
 import Table from '../Table/Table';
+import isEmpty from '../../helpers/helpers';
 
 export default class Row extends Component {
   constructor(props) {
@@ -13,29 +14,28 @@ export default class Row extends Component {
     this.deleteRow = this.deleteRow.bind(this);
   }
 
-  isEmpty(obj) {
-    return Object.keys(obj).length === 0;
-  }
-
   toggleShowKids() {
     const { displayingKids } = this.state;
     this.setState({ displayingKids: !displayingKids });
   }
 
   getTableLable(kids) {
-    return Object.keys(kids)[0];
+    if (kids) {
+      return Object.keys(kids)[0];
+    }
   }
 
   deleteRow(e) {
     e.stopPropagation();
-    const { deleteRow, index } = this.props;
-    deleteRow(index);
+    const { deleteRow, index, path } = this.props;
+    // console.log('Will delete on index', index);
+    deleteRow(index, path);
   }
 
   renderData(displayingKids, kids) {
     const { data } = this.props;
     const html = [];
-    if (!this.isEmpty(kids)) {
+    if (!isEmpty(kids)) {
       html.push(
         <th key="<" className="data-cell">
           {displayingKids ? ' ˅ ' : ' > '}
@@ -61,12 +61,12 @@ export default class Row extends Component {
 
   render() {
     const { displayingKids } = this.state;
-    const { kids } = this.props;
+    const { kids, deleteRow } = this.props;
     return (
       <>
         <tr
           className="row"
-          onClick={this.isEmpty(kids) ? null : this.toggleShowKids}
+          onClick={isEmpty(kids) ? null : this.toggleShowKids}
         >
           {this.renderData(displayingKids, kids)}
         </tr>
@@ -77,6 +77,7 @@ export default class Row extends Component {
                 data={kids}
                 isKids={true}
                 tableLabel={this.getTableLable(kids)}
+                deleteRow={deleteRow}
               />
             )}
           </td>
