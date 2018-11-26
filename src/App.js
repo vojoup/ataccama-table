@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import Table from "./components/Table/Table";
-import "./App.css";
-import Data from "./assets/data.json";
+import React, { Component } from 'react';
+import Table from './components/Table/Table';
+import './App.css';
+import Data from './assets/data.json';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: Data
+      data: Data,
     };
     this.deleteRow = this.deleteRow.bind(this);
   }
@@ -18,21 +18,19 @@ class App extends Component {
       data.splice(index, 1);
       data.filter(d => d);
       this.setState({ data });
-      return;
     } else {
       this.deleteChildren(data, path);
       this.setState({ data });
-      return;
     }
   }
 
   deleteChildren(data, path) {
-    if (typeof path === "string") {
-      let parts = path.split(".");
+    if (typeof path === 'string') {
+      const parts = path.split('.');
       if (parts.length === 1) {
         return delete data[parts[0]];
       }
-      return this.deleteChildren(data[parts[0]], parts.slice(1).join("."));
+      return this.deleteChildren(data[parts[0]], parts.slice(1).join('.'));
     }
   }
 
