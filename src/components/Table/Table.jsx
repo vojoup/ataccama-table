@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Row from '../Row/Row';
-import './Table.css';
-import isEmpty from '../../helpers/helpers';
+import React, { Component } from "react";
+import Row from "../Row/Row";
+import "./Table.css";
+import isEmpty from "../../helpers/helpers";
 
 export default class Table extends Component {
   renderRows(dataToProccess, isKids) {
@@ -10,57 +10,40 @@ export default class Table extends Component {
       return [];
     }
     if (!isKids) {
-      return dataToProccess.map(({ data, kids }, i) => (
-        <Row
-          data={data}
-          kids={kids}
-          index={i}
-          key={i}
-          path={i}
-          deleteRow={deleteRow}
-        />
-      ));
-    } else {
-      return dataToProccess[Object.keys(dataToProccess)[0]].records.map(
-        ({ data, kids }, i) => (
+      return dataToProccess.map(({ data, kids }, i) => {
+        console.log("data to process", dataToProccess);
+        console.log("data 1st level index", i);
+        return (
           <Row
             data={data}
             kids={kids}
-            key={i}
             index={i}
-            path={this.getPath(dataToProccess, 'records')}
+            key={i}
+            path={i}
             deleteRow={deleteRow}
           />
-        ),
+        );
+      });
+    } else {
+      return dataToProccess[Object.keys(dataToProccess)[0]].records.map(
+        ({ data, kids }, i) => {
+          const { path } = this.props;
+          const dataName = Object.keys(dataToProccess)[0];
+          const childPath = `${path}.kids.${dataName}.records.${i}`;
+          console.log("Final child path", childPath);
+          return (
+            <Row
+              data={data}
+              kids={kids}
+              key={i}
+              index={i}
+              path={childPath}
+              deleteRow={deleteRow}
+            />
+          );
+        }
       );
     }
-  }
-
-  getPath(obj, keyToFind) {
-    let finalPath;
-    for (let prop in obj) {
-      if (obj.hasOwnProperty(prop)) {
-        if (prop === keyToFind) {
-          return prop;
-        }
-        let item = obj[prop];
-        if (item instanceof Array || item instanceof Object) {
-          let localResult = (p => {
-            let result = this.getPath(item, keyToFind);
-            if (result) {
-              return p + '.' + result;
-            }
-          })(prop);
-
-          if (localResult) {
-            finalPath = localResult;
-            break;
-          }
-        }
-      }
-    }
-    console.log('Final Path', finalPath);
-    return finalPath;
   }
 
   getHeadings(data, isKids) {
@@ -69,7 +52,7 @@ export default class Table extends Component {
         return Object.keys(data[0].data) || [];
       } else {
         const childHeadings = Object.keys(
-          data[Object.keys(data)[0]].records[0].data,
+          data[Object.keys(data)[0]].records[0].data
         );
         return childHeadings;
       }

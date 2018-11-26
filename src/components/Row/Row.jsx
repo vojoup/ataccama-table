@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import './Row.css';
-import Table from '../Table/Table';
-import isEmpty from '../../helpers/helpers';
+import React, { Component } from "react";
+import "./Row.css";
+import Table from "../Table/Table";
+import isEmpty from "../../helpers/helpers";
 
 export default class Row extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayingKids: false,
+      displayingKids: false
     };
     this.toggleShowKids = this.toggleShowKids.bind(this);
     this.renderData = this.renderData.bind(this);
@@ -28,7 +28,6 @@ export default class Row extends Component {
   deleteRow(e) {
     e.stopPropagation();
     const { deleteRow, index, path } = this.props;
-    // console.log('Will delete on index', index);
     deleteRow(index, path);
   }
 
@@ -38,8 +37,8 @@ export default class Row extends Component {
     if (!isEmpty(kids)) {
       html.push(
         <th key="<" className="data-cell">
-          {displayingKids ? ' ˅ ' : ' > '}
-        </th>,
+          {displayingKids ? " ˅ " : " > "}
+        </th>
       );
     } else {
       html.push(<th key="<" className="data-cell" />);
@@ -48,20 +47,20 @@ export default class Row extends Component {
       html.push(
         <th className="data-cell" key={i}>
           {data[item]}
-        </th>,
-      ),
+        </th>
+      )
     );
     html.push(
       <th key="X" className="data-cell delete" onClick={this.deleteRow}>
         X
-      </th>,
+      </th>
     );
     return html;
   }
 
   render() {
     const { displayingKids } = this.state;
-    const { kids, deleteRow } = this.props;
+    const { kids, deleteRow, index, path } = this.props;
     return (
       <>
         <tr
@@ -78,6 +77,8 @@ export default class Row extends Component {
                 isKids={true}
                 tableLabel={this.getTableLable(kids)}
                 deleteRow={deleteRow}
+                index={index}
+                path={path}
               />
             )}
           </td>
