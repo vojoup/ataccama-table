@@ -10,27 +10,22 @@ export default class Table extends Component {
       return [];
     }
     if (!isKids) {
-      return dataToProccess.map(({ data, kids }, i) => {
-        console.log("data to process", dataToProccess);
-        console.log("data 1st level index", i);
-        return (
-          <Row
-            data={data}
-            kids={kids}
-            index={i}
-            key={i}
-            path={i}
-            deleteRow={deleteRow}
-          />
-        );
-      });
+      return dataToProccess.map(({ data, kids }, i) => (
+        <Row
+          data={data}
+          kids={kids}
+          index={i}
+          key={i}
+          path={i}
+          deleteRow={deleteRow}
+        />
+      ));
     } else {
       return dataToProccess[Object.keys(dataToProccess)[0]].records.map(
         ({ data, kids }, i) => {
           const { path } = this.props;
           const dataName = Object.keys(dataToProccess)[0];
           const childPath = `${path}.kids.${dataName}.records.${i}`;
-          console.log("Final child path", childPath);
           return (
             <Row
               data={data}
@@ -50,16 +45,16 @@ export default class Table extends Component {
     if (data instanceof Object && !isEmpty(data)) {
       if (!isKids) {
         return Object.keys(data[0].data) || [];
-      } else {
+      } else if (data[Object.keys(data)[0]].records[0]) {
         const childHeadings = Object.keys(
           data[Object.keys(data)[0]].records[0].data
         );
-        return childHeadings;
+        return childHeadings || [];
       }
     }
   }
 
-  renderTableHeading(headings, isKids) {
+  renderTableHeading(headings) {
     const headingHtml = headings.map((key, i) => (
       <th className="lable" key={key + i}>
         {key}
@@ -78,7 +73,7 @@ export default class Table extends Component {
         <caption>{tableLabel}</caption>
         <thead>
           <tr className="table-heading">
-            {headings && this.renderTableHeading(headings, isKids)}
+            {headings && this.renderTableHeading(headings)}
           </tr>
         </thead>
         <tbody>{data && this.renderRows(data, isKids)}</tbody>

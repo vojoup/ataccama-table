@@ -27,6 +27,7 @@ export default class Row extends Component {
 
   deleteRow(e) {
     e.stopPropagation();
+    e.preventDefault();
     const { deleteRow, index, path } = this.props;
     deleteRow(index, path);
   }
