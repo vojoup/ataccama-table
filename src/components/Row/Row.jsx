@@ -16,10 +16,14 @@ export default class Row extends Component {
 
   getTableLable(kids) {
     // Get lable only when there are some child records
-    if (Object.values(kids[Object.keys(kids)[0]].records).length !== 0) {
+    if (this.isKidRecordsEmpty(kids)) {
       console.log(kids);
       return Object.keys(kids)[0];
     }
+  }
+
+  isKidRecordsEmpty(kids) {
+    return Object.values(kids[Object.keys(kids)[0]].records).length !== 0;
   }
 
   toggleShowKids() {
@@ -37,7 +41,7 @@ export default class Row extends Component {
   renderData(displayingKids, kids) {
     const { data } = this.props;
     const html = [];
-    if (!isEmpty(kids)) {
+    if (!isEmpty(kids) && this.isKidRecordsEmpty(kids)) {
       html.push(
         <th key="<" className="data-cell">
           {displayingKids ? ' ˅ ' : ' > '}
