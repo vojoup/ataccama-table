@@ -4,6 +4,13 @@ import './Table.css';
 import isEmpty from '../../helpers/helpers';
 
 export default class Table extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      headings: this.getHeadings(props.data, props.isKids),
+    };
+  }
+
   getHeadings(data, isKids) {
     if (data instanceof Object && !isEmpty(data)) {
       if (!isKids) {
@@ -47,7 +54,7 @@ export default class Table extends Component {
 
   render() {
     const { data, isKids, tableLabel } = this.props;
-    const headings = this.getHeadings(data, isKids);
+    const { headings } = this.state;
     return (
       <table>
         <caption>{tableLabel}</caption>

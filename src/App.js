@@ -15,7 +15,7 @@ class App extends Component {
   deleteRow(index, path) {
     const { data } = this.state;
     if (index === path) {
-      data.splice(index, 1);
+      delete data[index];
       data.filter(d => d);
       this.setState({ data });
     } else {
