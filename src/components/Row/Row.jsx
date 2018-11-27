@@ -15,7 +15,9 @@ export default class Row extends Component {
   }
 
   getTableLable(kids) {
-    if (kids) {
+    // Get lable only when there are some child records
+    if (Object.values(kids[Object.keys(kids)[0]].records).length !== 0) {
+      console.log(kids);
       return Object.keys(kids)[0];
     }
   }
